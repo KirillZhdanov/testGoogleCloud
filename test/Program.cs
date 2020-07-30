@@ -54,16 +54,6 @@ namespace test
                 string filetoUpload = GetFilePath("data");
                 Console.WriteLine($"FILETOUPLOAD: { filetoUpload}");
                 List<string> str = DirSearch(filetoUpload);
-                string dir = "avalongateway.com";
-              /*foreach (string s in str)
-                {
-                    Console.WriteLine(s);
-                    FileInfo test = new FileInfo(s);
-                    string name = test.Name;
-                    string ext = test.Extension;
-                    if (!s.Contains(dir))
-                        dir = new FileInfo(test.DirectoryName).Name;
-                    Console.WriteLine("DIR:      " + dir);*/
                 FileAttributes attr = File.GetAttributes(e.FullPath);
 
                 if (!attr.HasFlag(FileAttributes.Directory))
@@ -81,13 +71,7 @@ namespace test
                     Console.WriteLine($"DIRECTORY{ e.Name}");
                     storageClient.UploadObject(bucketName, $"{e.Name.Replace("\\", "/")}/", "Folder", new MemoryStream(content));
                 }
-                //}
-                /* using (var fileStream = new FileStream(filetoUpload, FileMode.Open,
-                     FileAccess.Read, FileShare.Read))
-                 {
-                     storageClient.UploadObject(bucketName, "avalongateway.com/", "Folder", fileStream);
-                 }*/
-                //Console.WriteLine("uploaded the file successfully");
+                
             }
             catch (Exception ex)
             {
